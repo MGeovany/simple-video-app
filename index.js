@@ -16,10 +16,10 @@ app.listen(PORT, () => {
   console.log(`escuchando en: ${PORT}`)
 })
 
-app.use(express.static(path.join(__dirname, 'public')))
-
 app.use('/api', videos)
-
+app.use('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'))
+})
 app.get('*', (req, res) => {
   res.status(404).send('<h1> 404 not found</h1>')
 })
